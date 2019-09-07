@@ -6,6 +6,8 @@ import DashView from './components/Dash.vue'
 
 import { TokenService } from './services/storage.service'
 
+import NotFoundView from './components/404.vue'
+
 import DashboardView from './components/views/Dashboard.vue'
 import BlankView from './components/views/Blank.vue'
 
@@ -41,6 +43,12 @@ const router = new Router({
           meta: { description: 'blank view' }
         },
       ]
+    }, , {
+      path: '*',
+      component: NotFoundView,
+      meta: {
+        public: true
+      }
     }
   ]
 })
