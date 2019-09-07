@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+
+{
+    "name":"张三",
+    "city":"北京"
+}

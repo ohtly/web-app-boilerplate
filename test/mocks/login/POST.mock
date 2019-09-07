@@ -1,0 +1,8 @@
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+Response-Delay: 1000
+
+{
+    "error": "The user name or password is incorrect."
+}
