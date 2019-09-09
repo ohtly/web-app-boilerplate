@@ -43,7 +43,7 @@ const router = new Router({
           meta: { description: 'blank view' }
         },
       ]
-    }, , {
+    }, {
       path: '*',
       component: NotFoundView,
       meta: {

@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>Login view</h1>
-    <div>
+    <form @submit.prevent="handleLogin">
       <div v-if="authenticating">login..</div>
       <div v-if="authenticationError!=''">{{authenticationError}}</div>
       <input placeholder="User name" v-model="userName" />
       <input placeholder="Password" type="password" v-model="password" />
-      <button @click="handleLogin">登录</button>
-    </div>
+      <button>登录</button>
+    </form>
   </div>
 </template>
 

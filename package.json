@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "VUE_APP_ROOT_API=http://localhost:9900/ vue-cli-service serve",
+    "serve": "VUE_APP_API_BASE_URL=http://localhost:9900/ vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "mockserver": "MOCK_HEADERS=authorization mockserver -p 9900 -m test/mocks"

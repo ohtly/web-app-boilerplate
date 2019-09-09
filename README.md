@@ -58,6 +58,8 @@ mockserver 使用的是：https://github.com/namshi/mockserver
 yarn mockserver
 ```
 
+将启动 mockserver 在 9900 端口。
+
 有关 mockserver 相关的模拟 response 配置，见 /test/mock
 
 ## 架构说明
@@ -72,13 +74,27 @@ yarn mockserver
 借助 mockserver 实现了对 JWT/Token 认证的功能
 
 - 认证成功后，token 会加入到 request 头，用于 RESTful
-- 用户名/密码为 zhangsan/1234，其他情况会提示错误
+- 用户名/密码为 `zhangsan`/`1234`，其他情况会提示错误
 
 TODO，目前未对 refresh token 做处理，后续加入。
+
+### 使用日志
+
+
+### 可用的服务
+
+#### 本地存储服务 storage service
+
+#### HTTP访问服务 api service
+
+#### 用户登录/退出登录服务 user service
+
+
+### 杂项
+
+- 页面未找到的处理，见 /src/components/404.vue
 
 ## 其他
 
 - 异常的处理，https://medium.com/js-dojo/error-exception-handling-in-vue-js-application-6c26eeb6b3e4
 - 增加 app-log，见：https://github.com/arunredhu/vuejs_boilerplate/blob/master/src/app/shared/services/app-logger/app-logger.js
-
-

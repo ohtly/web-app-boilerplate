@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
 import { UserService } from '../services/user.service'
 import { TokenService } from '../services/storage.service'
 import router from '../router'
@@ -33,6 +30,7 @@ const actions = {
             router.push(router.history.current.query.redirect || '/')
         } catch (error) {
             commit('loginError', error)
+            throw error
         }
     },
     logout({ commit }) {

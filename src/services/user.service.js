@@ -1,5 +1,6 @@
 import ApiService from "./api.service"
 import { TokenService } from './storage.service'
+import { logger } from '@/services/log.service'
 
 const UserService = {
     login: async function (userName, password) {
@@ -16,6 +17,7 @@ const UserService = {
             TokenService.saveToken(response.data.access_token)
             ApiService.setHeader()
 
+            logger.info(`get access token: ${response.data.access_token}`)
             return response.data.access_token
 
         } catch (error) {
