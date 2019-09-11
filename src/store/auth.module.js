@@ -78,7 +78,6 @@ const mutations = {
     },
     loginError(state, error) {
         logger.info(`登录错误.`)
-        console.log(error)
         state.authenticating = false
         state.authenticationError = error
     },

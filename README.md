@@ -181,6 +181,8 @@ logger.error("error");
 logger.logToServer(error); // 发送到服务器端
 ```
 
+不要在代码中使用`console.log`等类似代码
+
 - 开发模式下，终端显示日志
 - 生产模式下，logToServer 将发送到服务器端，其他方法为空
 
