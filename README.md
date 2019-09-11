@@ -2,7 +2,9 @@
 
 基于 Vue.js 的模板项目。
 
-## 根据模板创建项目
+## 命令说明
+
+### 创建项目
 
 clone 项目：
 
@@ -10,37 +12,126 @@ clone 项目：
 git clone https://github.com/ohtly/web-app-boilerplate.git YOUR_WEB_APP_NAME
 ```
 
-## Project setup
+### 安装依赖包
 
-本节是 Vue CLI 默认项目设置。
-
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
+进入项目目录：
 
 ```
-yarn run serve
+yarn
 ```
 
-### Compiles and minifies for production
+### 启动开发环境
+
+启动 mockserver:
 
 ```
-yarn run build
+yarn mockserver
 ```
 
-### Run your tests
+启动 web app
 
 ```
-yarn run test
+yarn serve
 ```
 
-### Lints and fixes files
+### 构建生产环境的文件
 
 ```
-yarn run lint
+yarn build
 ```
+
+## 开发说明
+
+### 架构已经实现的功能
+
+- 登录和相关的 token 机制
+- 基本异常处理机制
+- 过滤器结构
+- 代码基本结构
+- 基础布局
+
+### 目录/文件结构
+
+.
+├── README.md
+├── babel.config.js
+├── dist
+│   ├── css
+│   │   └── app.b5239e9b.css
+│   ├── favicon.ico
+│   ├── index.html
+│   └── js
+│       ├── app.485218ae.js
+│       ├── app.485218ae.js.map
+│       ├── chunk-vendors.72d19647.js
+│       └── chunk-vendors.72d19647.js.map
+├── package.json
+├── postcss.config.js
+├── public
+│   ├── favicon.ico
+│   └── index.html
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   └── logo.png
+│   ├── components
+│   │   ├── 404.vue
+│   │   ├── Dash.vue
+│   │   ├── Login.vue
+│   │   ├── layout
+│   │   │   ├── DashFooter.vue
+│   │   │   ├── DashHeader.vue
+│   │   │   ├── DashSidebar.vue
+│   │   │   ├── Default.vue
+│   │   │   ├── Login.vue
+│   │   │   └── index.js
+│   │   ├── views
+│   │   │   ├── Dashboard.vue
+│   │   │   └── demos
+│   │   │       ├── MockRefreshError.vue
+│   │   │       ├── error
+│   │   │       │   ├── ErrorDemo.vue
+│   │   │       │   └── GenerateException.vue
+│   │   │       └── index.js
+│   │   └── widgets
+│   │       ├── ErrorBoundary.vue
+│   │       ├── Sidebar.vue
+│   │       └── index.js
+│   ├── environment
+│   │   └── index.js
+│   ├── filters
+│   │   └── index.js
+│   ├── main.js
+│   ├── plugins
+│   │   ├── exception.handler.js
+│   │   └── index.js
+│   ├── router.js
+│   ├── services
+│   │   ├── api.service.js
+│   │   ├── log.service.js
+│   │   ├── storage.service.js
+│   │   └── user.service.js
+│   └── store
+│       ├── auth.module.js
+│       └── index.js
+├── test
+│   └── mocks
+│       ├── login
+│       │   ├── OPTIONS.mock
+│       │   ├── POST--{"refresh_token":"abcd"}.mock
+│  
+└── yarn.lock
+
+### 基本路由
+
+- /login 登录页面
+- /
+  - dashboard 工作台
+  - error-demo 演示错误/异常处理机制
+  - mock-refresh-error 演示 token 过期的处理
+- * 404 
+
+---
 
 ## 附加设置
 
