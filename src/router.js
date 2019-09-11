@@ -9,7 +9,7 @@ import { TokenService } from './services/storage.service'
 import NotFoundView from './components/404.vue'
 
 import DashboardView from './components/views/Dashboard.vue'
-import { ErrorDemoView } from './components/views/demos'
+import { ErrorDemoView, MockRefreshErrorView } from './components/views/demos'
 
 import { logger } from "@/services/log.service"
 
@@ -44,6 +44,12 @@ const router = new Router({
           name: 'ErrorDemo',
           meta: { description: 'error demo view' }
         },
+        {
+          path: 'mock-refresh-error',
+          component: MockRefreshErrorView,
+          name: 'MockRefreshError',
+          meta: { description: 'mock refresh error view' }
+        },
       ]
     }, {
       path: '*',
@@ -56,7 +62,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  logger.info(`router 前处理, path: ${to.fullPath}`)
+  logger.info(`路由前处理, 路径: ${to.fullPath}`)
   const isPublic = to.matched.some(record => record.meta.public)
   const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
   const loggedIn = !!TokenService.getToken()

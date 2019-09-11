@@ -4,7 +4,6 @@ import { logger } from '@/services/log.service';
 
 // vue 实例内，同步异常捕获
 Vue.config.errorHandler = (err, vm, info) => {
-    console.log(`vue error handler..`)
     logger.logToServer({ err, vm, info });
     return true
 };

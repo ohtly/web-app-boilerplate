@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ApiService from "../../services/api.service";
+import ApiService from "@/services/api.service";
 import { logger } from "@/services/log.service";
 
 export default {

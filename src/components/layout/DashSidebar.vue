@@ -7,6 +7,9 @@
       <li class="menu_item">
         <router-link to="/error-demo" class="menu_link">演示对Error/Exception的处理</router-link>
       </li>
+      <li class="menu_item">
+        <router-link to="/mock-refresh-error" class="menu_link">演示refresh token生效</router-link>
+      </li>
       <li class="menu_item"></li>
     </ul>
   </div>
