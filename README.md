@@ -40,31 +40,34 @@ yarn serve
 yarn build
 ```
 
+### 浏览器运行 webapp
+
+默认访问：http://localhost:8080
+
+默认进入登录页面，帐号/密码：zhangsan/1234
+
 ## 开发说明
 
 ### 架构已经实现的功能
 
 - 登录和相关的 token 机制
 - 基本异常处理机制
+- 日志
 - 过滤器结构
 - 代码基本结构
 - 基础布局
+
+### 使用到的技术
+
+- 使用 Vue/Vue Router/Vuex
+- Fetch/XHR，使用 Axios
+- 使用 mockserver 实现对 api 接口的 mock
 
 ### 目录/文件结构
 
 .
 ├── README.md
 ├── babel.config.js
-├── dist
-│   ├── css
-│   │   └── app.b5239e9b.css
-│   ├── favicon.ico
-│   ├── index.html
-│   └── js
-│       ├── app.485218ae.js
-│       ├── app.485218ae.js.map
-│       ├── chunk-vendors.72d19647.js
-│       └── chunk-vendors.72d19647.js.map
 ├── package.json
 ├── postcss.config.js
 ├── public
@@ -88,15 +91,14 @@ yarn build
 │   │   ├── views
 │   │   │   ├── Dashboard.vue
 │   │   │   └── demos
-│   │   │       ├── MockRefreshError.vue
-│   │   │       ├── error
-│   │   │       │   ├── ErrorDemo.vue
-│   │   │       │   └── GenerateException.vue
-│   │   │       └── index.js
+│   │   │   ├── MockRefreshError.vue
+│   │   │   ├── error
+│   │   │   │   ├── ErrorDemo.vue
+│   │   │   │   └── GenerateException.vue
+│   │   │   └── index.js
 │   │   └── widgets
-│   │       ├── ErrorBoundary.vue
-│   │       ├── Sidebar.vue
-│   │       └── index.js
+│   │   ├── ErrorBoundary.vue
+│   │   └── index.js
 │   ├── environment
 │   │   └── index.js
 │   ├── filters
@@ -112,13 +114,13 @@ yarn build
 │   │   ├── storage.service.js
 │   │   └── user.service.js
 │   └── store
-│       ├── auth.module.js
-│       └── index.js
+│   ├── auth.module.js
+│   └── index.js
 ├── test
 │   └── mocks
-│       ├── login
-│       │   ├── OPTIONS.mock
-│       │   ├── POST--{"refresh_token":"abcd"}.mock
+│   ├── login
+│   │   ├── OPTIONS.mock
+│   │   ├── POST--{"refresh_token":"abcd"}.mock
 │  
 └── yarn.lock
 
@@ -129,67 +131,54 @@ yarn build
   - dashboard 工作台
   - error-demo 演示错误/异常处理机制
   - mock-refresh-error 演示 token 过期的处理
-- * 404 
+- - 404
 
----
+### 编写界面
 
-## 附加设置
+主要有以下几种界面
 
-在 Vue CLI 生成项目基础上，又增加了一些项目会用到的附加设置。
+- 界面，view，在 ./views 目录下，可以再根据模块划分目录
+- 布局，layout，
+  - 界面的布局，写在界面的目录下
+  - 尽量借助 flexbox/grid，以及 vue 的 slot
+  - 尽量让界面和布局解耦
+- 可复用的界面部件，widget
 
-### mockserver
+### 状态管理
 
-帮助 Vue.js 开发人员在没有服务器端支持的情况下，先创建和使用模拟的服务器端功能。
+一个模块一个文件，类似 `auth.module.js`
+
+可以统一通过`action`服务，简洁
+
+异步`action`必须有 loading 状态，类似登录
+
+### 编写 mock
 
 mockserver 使用的是：https://github.com/namshi/mockserver
 
-运行 mockserver
+编写 mock，可不必借助服务器端的实现，并行开发前端。
+
+可参考已经实现的 mock，见 /test/mocks
+
+### 日志
+
+日志服务：
 
 ```
-yarn mockserver
+import { logger } from "@/services/log.service"
 ```
 
-将启动 mockserver 在 9900 端口。
+使用方式：
 
-有关 mockserver 相关的模拟 response 配置，见 /test/mock
+```js
+logger.info("info");
+logger.error("error");
+...
+logger.logToServer(error); // 发送到服务器端
+```
 
-## 架构说明
-
-### 基本架构
-
-- 使用 Vue/Vue Router/Vuex
-- Fetch/XHR，使用 Axios
-
-### 基于 Token 的认证
-
-借助 mockserver 实现了对 JWT/Token 认证的功能
-
-- 认证成功后，token 会加入到 request 头，用于 RESTful
-- 用户名/密码为 `zhangsan`/`1234`，其他情况会提示错误
-
-TODO，目前未对 refresh token 做处理，后续加入。
-
-### 路由和访问控制
-
-### 使用日志
-
-### 可用的服务
-
-#### 本地存储服务 storage service
-
-#### HTTP 访问服务 api service
-
-#### 用户登录/退出登录服务 user service
-
-### 杂项
-
-- 页面未找到的处理，见 /src/components/404.vue
-
-## 其他
-
-- 异常的处理，https://medium.com/js-dojo/error-exception-handling-in-vue-js-application-6c26eeb6b3e4
-- 增加 app-log，见：https://github.com/arunredhu/vuejs_boilerplate/blob/master/src/app/shared/services/app-logger/app-logger.js
-- 测试使用的免费 Restful api，[JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+- 开发模式下，终端显示日志
+- 生产模式下，logToServer 将发送到服务器端，其他方法为空
 
 ## 参考
 
