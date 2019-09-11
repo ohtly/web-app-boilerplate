@@ -76,10 +76,11 @@ const mutations = {
         state.accessToken = ''
         state.authenticating = false
     },
-    loginError(state, { message }) {
+    loginError(state, error) {
         logger.info(`登录错误.`)
+        console.log(error)
         state.authenticating = false
-        state.authenticationError = message
+        state.authenticationError = error
     },
     refreshTokenPromise(state, promise) {
         state.refreshTokenPromise = promise

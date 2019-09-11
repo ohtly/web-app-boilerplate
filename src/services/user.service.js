@@ -31,7 +31,7 @@ const UserService = {
 
             return response.data.access_token
         } catch (error) {
-            throw new AuthenticationError(error.response.status, zerror.response.data.error)
+            throw new AuthenticationError(error.response.status, error.response.data.error)
         }
     },
     refreshToken: async function () {
@@ -46,10 +46,8 @@ const UserService = {
         }
 
         try {
-            logger.info('cusomer request ..')
             const response = await ApiService.customRequest(requestData)
             const { access_token, refresh_token } = response.data
-            logger.info('cusomer request .. ok')
 
             TokenService.saveToken(access_token)
             TokenService.saveRefreshToken(refresh_token)
@@ -57,7 +55,7 @@ const UserService = {
 
             return access_token
         } catch (error) {
-            throw new AuthenticationError(error.response.status, zerror.response.data.error)
+            throw new AuthenticationError(error.response.status, error.response.data.error)
         }
     },
     logout() {

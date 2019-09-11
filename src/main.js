@@ -10,9 +10,13 @@ import { logger } from '@/services/log.service'
 import ApiService from './services/api.service'
 import { TokenService } from './services/storage.service'
 
+import { capitalize } from '@/filters'
+Vue.filter('capitalize', capitalize)
+
 Vue.config.productionTip = false
 
 ApiService.init(apiBaseUrl)
+
 if (TokenService.getToken()) {
   ApiService.setHeader()
 }
