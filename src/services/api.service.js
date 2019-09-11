@@ -21,9 +21,9 @@ const ApiService = {
                 } else {
                     try {
                         logger.info('重新请求 refresh token ..')
-                        
+
                         // 对测试的支持 ---->
-                        if (error.config.url.includes('/test')) {
+                        if (error.config.url.includes('/test2')) {
                             TokenService.saveRefreshToken('3333');
                         }
                         // <----
