@@ -116,8 +116,8 @@ yarn build
 │   │   ├── storage.service.js
 │   │   └── user.service.js
 │   └── store
-│   ├── auth.module.js
-│   └── index.js
+│       ├── auth.module.js
+│       └── index.js
 ├── test
 │   └── mocks
 │   ├── login
