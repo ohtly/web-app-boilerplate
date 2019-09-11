@@ -54,6 +54,7 @@ yarn build
 - 基本异常处理机制
 - 日志
 - 过滤器结构
+- 插件结构
 - 代码基本结构
 - 基础布局
 
@@ -65,6 +66,7 @@ yarn build
 
 ### 目录/文件结构
 
+```
 .
 ├── README.md
 ├── babel.config.js
@@ -123,6 +125,8 @@ yarn build
 │   │   ├── POST--{"refresh_token":"abcd"}.mock
 │  
 └── yarn.lock
+
+```
 
 ### 基本路由
 
