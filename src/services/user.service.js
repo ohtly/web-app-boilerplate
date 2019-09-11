@@ -17,14 +17,13 @@ const UserService = {
             TokenService.saveToken(response.data.access_token)
             ApiService.setHeader()
 
-            logger.info(`get access token: ${response.data.access_token}`)
             return response.data.access_token
-
         } catch (error) {
             throw new Error(error.response.data.error)
         }
     },
     logout() {
+        logger.info(`退出登录..`)
         TokenService.removeToken()
         ApiService.removeHeader()
     }

@@ -78,17 +78,17 @@ yarn mockserver
 
 TODO，目前未对 refresh token 做处理，后续加入。
 
-### 使用日志
+### 路由和访问控制
 
+### 使用日志
 
 ### 可用的服务
 
 #### 本地存储服务 storage service
 
-#### HTTP访问服务 api service
+#### HTTP 访问服务 api service
 
 #### 用户登录/退出登录服务 user service
-
 
 ### 杂项
 
@@ -98,3 +98,11 @@ TODO，目前未对 refresh token 做处理，后续加入。
 
 - 异常的处理，https://medium.com/js-dojo/error-exception-handling-in-vue-js-application-6c26eeb6b3e4
 - 增加 app-log，见：https://github.com/arunredhu/vuejs_boilerplate/blob/master/src/app/shared/services/app-logger/app-logger.js
+- 测试使用的免费 Restful api，[JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+
+## 参考
+
+项目参考的文章/代码如下：
+
+- [arunredhu/vuejs_boilerplate](https://github.com/arunredhu/vuejs_boilerplate)，以及 README 中相关的博客文章
+- [Structuring a Vue project — Authentication](https://medium.com/@zitko/structuring-a-vue-project-authentication-87032e5bfe16)，jwt/refresh token 的主要机制来源于它

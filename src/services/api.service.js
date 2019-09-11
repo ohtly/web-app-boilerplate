@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { TokenService } from './storage.service'
+import { logger } from '@/services/log.service'
 
 const ApiService = {
     init(baseURL) {
         axios.defaults.baseURL = baseURL
     },
     setHeader() {
+        logger.info(`设置 Authorization 头信息`)
         axios.defaults.headers.common['Authorization'] = `Bearer ${TokenService.getToken()}`
     },
     removeHeader() {

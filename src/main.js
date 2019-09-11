@@ -1,10 +1,12 @@
 import Vue from 'vue'
+
 import './plugins'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { apiBaseUrl } from '@/environment'
+import { logger } from '@/services/log.service'
 
-import { apiBaseUrl } from '@/environment';
 import ApiService from './services/api.service'
 import { TokenService } from './services/storage.service'
 
@@ -20,3 +22,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+logger.info('App 完成加载')

@@ -9,7 +9,9 @@ import { TokenService } from './services/storage.service'
 import NotFoundView from './components/404.vue'
 
 import DashboardView from './components/views/Dashboard.vue'
-import BlankView from './components/views/Blank.vue'
+import { ErrorDemoView } from './components/views/demos'
+
+import { logger } from "@/services/log.service"
 
 Vue.use(Router)
 
@@ -37,10 +39,10 @@ const router = new Router({
           meta: { description: 'Overview of environment' }
         },
         {
-          path: 'blank',
-          component: BlankView,
-          name: 'Blank',
-          meta: { description: 'blank view' }
+          path: 'error-demo',
+          component: ErrorDemoView,
+          name: 'ErrorDemo',
+          meta: { description: 'error demo view' }
         },
       ]
     }, {
@@ -54,11 +56,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  logger.info(`router 前处理, path: ${to.fullPath}`)
   const isPublic = to.matched.some(record => record.meta.public)
   const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
   const loggedIn = !!TokenService.getToken()
 
   if (!isPublic && !loggedIn) {
+    logger.info('检查.. 需要登录，转登录页面')
     return next({
       path: '/login',
       query: { redirect: to.fullPath }
@@ -66,6 +70,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if (loggedIn && onlyWhenLoggedOut) {
+    logger.info('登录页面仅当退出登录状态才可用，转默认首页 / ')
     return next('/')
   }
 

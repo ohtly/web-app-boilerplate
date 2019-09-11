@@ -1,5 +1,6 @@
 <template>
   <div>
+    <slot name="error" v-if="err!=null" :error="err" :clear="clear"></slot>
     <slot name="content"></slot>
   </div>
 </template>
@@ -21,15 +22,19 @@ export default {
     };
   },
   errorCaptured(err, vm, info) {
-    console.log(">>>>>>" + err);
     this.err = err;
     this.vm = vm;
     this.info = info;
     return !this.stopPropagation;
+  },
+  methods: {
+    clear() {
+      this.err = null;
+      this.vm = null;
+      this.info = null;
+    }
   }
 };
-
-// todo 编写一个子组件，引发错误，现在的示例，引发在父组件，没有走error-boundary
 </script>
 
 <style lang="css" scoped>

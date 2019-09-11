@@ -1,33 +1,25 @@
 <template>
-  <div>
-    dashboard view
-    <error-boundary>
-      <template #content>
-        <button @click="handleClick">引发错误</button>
-      </template>
-    </error-boundary>
+  <div class="dashboard__container">
+    <h2>工作台</h2>
   </div>
 </template>
 
 <script>
 import ApiService from "../../services/api.service";
-import { ErrorBoundary } from "@/components/widgets";
+import { logger } from "@/services/log.service";
+
 export default {
-  components: {
-    ErrorBoundary
-  },
-  methods: {
-    handleClick() {
-      console.log("clicked!");
-      throw new Error("click error!");
-    }
-  },
+  components: {},
+  methods: {},
   async mounted() {
     let response = await ApiService.get("/user");
-    console.log(response.data);
+    logger.info(response.data);
   }
 };
 </script>
 
-<style>
+<style scoped>
+.dashboard__container {
+  flex: 1;
+}
 </style>
