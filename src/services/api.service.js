@@ -3,6 +3,8 @@ import { TokenService } from './storage.service'
 import { logger } from '@/services/log.service'
 import store from '@/store'
 
+// TODO 如果一个url请求多次 401，也应退出登录
+
 const ApiService = {
     _401interceptor: null,
     mount401Interceptor() {
@@ -12,9 +14,38 @@ const ApiService = {
             return response
         }, async (error) => {
             if (error.response.status == 401) {
-                logger.info(`HTTP 401 转退出登录`)
-                store.dispatch("auth/logout")
-                throw error
+                if (error.config.url.includes('/login')) {
+                    logger.info(`HTTP 401 转退出登录`)
+                    store.dispatch("auth/logout")
+                    throw error
+                } else {
+                    try {
+                        logger.info('重新请求 refresh token ..')
+                        
+                        // 对测试的支持 ---->
+                        if (error.config.url.includes('/test')) {
+                            TokenService.saveRefreshToken('3333');
+                        }
+                        // <----
+
+                        await store.dispatch('auth/refreshToken')
+                        logger.info('refresh token 成功，重做之前的请求 ')
+
+                        // 对测试的支持 --->
+                        let { url, method, data } = error.config
+                        url = url.includes(`/visit`) ? url + '?id=7' : url
+                        // <---
+
+                        return this.customRequest({
+                            method,
+                            url,
+                            data
+                        })
+                    } catch (error) {
+                        throw error
+                    }
+                }
+
             }
         })
     },

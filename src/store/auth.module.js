@@ -7,7 +7,8 @@ import { logger } from "@/services/log.service"
 const state = {
     accessToken: TokenService.getToken(),
     authenticating: false,
-    authenticationError: ''
+    authenticationError: '',
+    refreshTokenPromise: null
 }
 
 const getters = {
@@ -39,6 +40,24 @@ const actions = {
         UserService.logout()
         commit('logoutSuccess')
         router.push('/login')
+    },
+    refreshToken({ commit, state }) {
+        logger.info('执行 refresh token ..')
+        if (!state.refreshTokenPromise) {
+            const p = UserService.refreshToken()
+            commit('refreshTokenPromise', p)
+
+            p.then(
+                response => {
+                    commit('refreshTokenPromise', null)
+                    commit('loginSuccess', response)
+                },
+                error => {
+                    commit('refreshTokenPromise', null)
+                }
+            )
+        }
+        return state.refreshTokenPromise
     }
 }
 
@@ -61,6 +80,9 @@ const mutations = {
         logger.info(`登录错误.`)
         state.authenticating = false
         state.authenticationError = message
+    },
+    refreshTokenPromise(state, promise) {
+        state.refreshTokenPromise = promise
     }
 }
 

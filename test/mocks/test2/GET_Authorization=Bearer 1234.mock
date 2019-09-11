@@ -1,0 +1,7 @@
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{
+    "error": "Error validating access token: Session has expired"
+}

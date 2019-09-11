@@ -8,7 +8,7 @@
       </li>
       <li>
         <span>refresh 失败的情况</span>
-        <button @click="handleClick">发送请求</button>
+        <button @click="handleClick2">发送请求</button>
       </li>
     </ul>
   </div>
@@ -22,8 +22,13 @@ export default {
   methods: {
     async handleClick() {
       logger.info(`发送请求..`);
-
       const response = await ApiService.get("/visit");
+      alert(response.data.message);
+    },
+    async handleClick2() {
+      logger.info(`发送请求..`);
+      const response = await ApiService.get("/test2");
+      alert(response.data.message);
     }
   }
 };
