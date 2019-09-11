@@ -135,7 +135,7 @@ yarn build
   - dashboard 工作台
   - error-demo 演示错误/异常处理机制
   - mock-refresh-error 演示 token 过期的处理
-- - 404
+- 404
 
 ### 编写界面
 
