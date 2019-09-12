@@ -4,6 +4,14 @@
 
 ## 访问 web app
 
+下载和安装依赖包：
+
+```
+git clone https://github.com/ohtly/web-app-boilerplate.git
+
+yarn
+```
+
 启动：
 
 ```
@@ -52,7 +60,7 @@ HTTP/1.1 401 Unauthorized
 - url VUE_APP_API_BASE_URL/user
 - 方法：GET
 
-成功的响应(返回 json 可任意)：
+成功的响应：
 
 ```
 HTTP/1.1 200 OK
@@ -107,3 +115,9 @@ HTTP/1.1 401 Unauthorized
     "error": "The refresh token is incorrect."
 }
 ```
+
+## 建议
+
+测试时可将 token 有效期缩短。
+
+另外，可在浏览器的 dev tools 中终端看到登录等日志信息，方便调试。
