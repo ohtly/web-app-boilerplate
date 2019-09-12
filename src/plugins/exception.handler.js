@@ -6,7 +6,7 @@ import { AuthenticationError } from '@/services/user.service';
 
 // vue 实例内，同步异常捕获
 Vue.config.errorHandler = async (err, vm, info) => {
-    if (err instanceof AuthenticationError || err.response.status == 401) {
+    if (err instanceof AuthenticationError || (err.response && err.response.status == 401)) {
         await store.dispatch('auth/logout')
     }
     logger.logToServer({ err, vm, info });

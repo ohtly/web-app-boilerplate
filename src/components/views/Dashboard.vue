@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard__container">
     <h2>工作台</h2>
-    <div>name: {{name | capitalize}}</div>
+    <div>姓名：{{user.name}}</div>
+    <div>城市：{{user.city}}</div>
   </div>
 </template>
 
@@ -13,13 +14,13 @@ export default {
   components: {},
   data() {
     return {
-      name: "tom"
+      user: {}
     };
   },
   methods: {},
   async mounted() {
     let response = await ApiService.get("/user");
-    logger.info(response.data);
+    this.user = response.data;
   }
 };
 </script>

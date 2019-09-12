@@ -38,18 +38,6 @@ const router = new Router({
           name: 'Dashboard',
           meta: { description: 'Overview of environment' }
         },
-        {
-          path: 'error-demo',
-          component: ErrorDemoView,
-          name: 'ErrorDemo',
-          meta: { description: 'error demo view' }
-        },
-        {
-          path: 'mock-refresh-error',
-          component: MockRefreshErrorView,
-          name: 'MockRefreshError',
-          meta: { description: 'mock refresh error view' }
-        },
       ]
     }, {
       path: '*',
