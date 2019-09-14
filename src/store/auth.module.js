@@ -83,7 +83,6 @@ const mutations = {
     logoutSuccess(state) {
         logger.info(`退出登录成功.`)
         state.accessToken = ''
-        state.authenticating = false
     },
     loginError(state, error) {
         logger.info(`登录错误.`)
@@ -95,9 +94,6 @@ const mutations = {
     },
     logoutRequest(state) {
         logger.info(`发起退出登录请求..`)
-    },
-    logoutSuccess(state) {
-        logger.info(`退出登录响应成功`)
     }
 }
 
