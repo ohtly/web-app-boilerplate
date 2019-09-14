@@ -36,10 +36,18 @@ const actions = {
             throw error
         }
     },
-    logout({ commit }) {
-        UserService.logout()
-        commit('logoutSuccess')
-        router.push('/login')
+    async logout({ commit }) {
+        commit('logoutRequest')
+        try {
+            await UserService.logout()
+            commit('logoutSuccess')
+        } catch (error) {
+            throw error
+        } finally {
+            router.push('/login')
+        }
+
+
     },
     refreshToken({ commit, state }) {
         logger.info('执行 refresh token ..')
@@ -52,7 +60,7 @@ const actions = {
                     commit('refreshTokenPromise', null)
                     commit('loginSuccess', response)
                 },
-                error => {
+                () => {
                     commit('refreshTokenPromise', null)
                 }
             )
@@ -63,18 +71,18 @@ const actions = {
 
 const mutations = {
     loginRequest(state) {
-        logger.info(`登录中..`)
+        logger.info(`发起登录请求..`)
         state.authenticating = true;
         state.authenticationError = ''
     },
     loginSuccess(state, accessToken) {
-        logger.info(`登录成功.`)
+        logger.info(`登录响应成功.`)
         state.accessToken = accessToken
+        state.authenticating = false
     },
     logoutSuccess(state) {
         logger.info(`退出登录成功.`)
         state.accessToken = ''
-        state.authenticating = false
     },
     loginError(state, error) {
         logger.info(`登录错误.`)
@@ -83,6 +91,9 @@ const mutations = {
     },
     refreshTokenPromise(state, promise) {
         state.refreshTokenPromise = promise
+    },
+    logoutRequest() {
+        logger.info(`发起退出登录请求..`)
     }
 }
 
