@@ -118,7 +118,21 @@ HTTP/1.1 401 Unauthorized
 
 ## 退出登录
 
+退出登录也会发起服务器端请求，主要是因为使用了 refresh token，需要通知服务器端清除相关记录。
 
+访问请求：
+
+- url VUE_APP_API_BASE_URL/logout
+- 方法：POST
+- 参数，`{"refresh_token": "REFRESH_TOKEN"}`
+
+成功的响应：
+
+```
+HTTP/1.1 204 No Content
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+```
 
 ## 建议
 
