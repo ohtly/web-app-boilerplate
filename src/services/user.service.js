@@ -58,12 +58,28 @@ const UserService = {
             throw new AuthenticationError(error.response.status, error.response.data.error)
         }
     },
-    logout() {
-        logger.info(`退出登录..`)
-        TokenService.removeToken()
-        ApiService.removeHeader()
+    async logout() {
+        try {
+            const refreshToken = TokenService.getRefreshToken()
+            const requestData = {
+                method: 'post',
+                url: '/logout',
+                data: {
+                    refresh_token: refreshToken
+                }
+            }
+            await ApiService.customRequest(requestData)
+        } catch (error) {
+            throw error
+        } finally {
+            TokenService.removeToken()
+            ApiService.removeHeader()
 
-        ApiService.unmount401Interceptor()
+            ApiService.unmount401Interceptor()
+        }
+
+
+
     }
 }
 
