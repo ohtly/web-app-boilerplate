@@ -1,14 +1,14 @@
 import Vue from 'vue';
 
 import { logger } from '@/services/log.service';
-import store from '@/store'
-import { AuthenticationError } from '@/services/user.service';
+
+Vue.config.warnHandler = function (msg, vm, info) {
+    logger.logToServer({ msg, vm, info });
+    return true
+}
 
 // vue 实例内，同步异常捕获
 Vue.config.errorHandler = async (err, vm, info) => {
-    if (err instanceof AuthenticationError || err.response.status == 401) {
-        await store.dispatch('auth/logout')
-    }
     logger.logToServer({ err, vm, info });
     return true
 };
